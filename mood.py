@@ -6,12 +6,12 @@ import requests
 from forms import MoodForm
 import indicoio
 import random
-import config 
+import os 
 
 app = Flask(__name__)
 Mobility(app)
 
-app.secret_key = config.moodmusickey
+app.secret_key = os.environ.get('MOODMUSICKEY')
 
 ###ROUTING###
 @app.route('/', methods = ['GET', 'POST'])
@@ -35,7 +35,7 @@ def sentiment(text_input):
     list5 = ["My Way", "Ex's & Oh's", "Antidote", "Like I'm gonna lose you", "Tennessee Whiskey", "See You Again", "Watch Me", "On My Mind", "I'll Show You",
     "Cheerleader", "The Hills", "Uptown Funk!", "Die a Happy Man", "How Deep Is Your Love", "Photograph", "Can't feel my face"]
 
-    indicoio.config.api_key = config.indico
+    indicoio.config.api_key = os.environ.get('INDICO')
     #text_input = raw_input('Tell me about your day: ') #raw_input for python 2.7
     sentiment = indicoio.sentiment_hq(text_input)
     songTitle = ""
